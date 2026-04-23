@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<title>Ønskeskyen · Creator Takeover 2026</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="deck-stage.js"></script>
+<style>
+  :root{
+    --bg:#FAF7F4;
+    --bg-alt:#F2ECE6;
+    --ink:#1e293b;
+    --ink-2:#334155;
+    --ink-3:#64748b;
+    --muted:#94a3b8;
+    --line:#E7E1DB;
+    --line-2:#D8D1C9;
+    --accent:#FF6334;
+    --accent-2:#4397FF;
+    --accent-ink:#B83D18;
+    --pink:#FFF0EB;
+    --pink-2:#FFD9C9;
+    --blue-soft:#E9F5FD;
+    --blue-soft-2:#D4EBFB;
+    --blue-tint:#eff6ff;
+    --slate-tint:#f1f5f9;
+    --cream:#D6C0A4;
+    --cream-soft:#F3EADD;
+    --ok:#059669;
+    --ok-2:#10b981;
+  }
+  html,body{margin:0;background:#000;}
+  *{box-sizing:border-box;}
+
+  /* slide base */
+  .slide{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    padding:60px 120px 56px 120px;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    letter-spacing:-0.01em;
+    font-feature-settings:"ss01","cv11","tnum";
+  }
+  .slide.dark{background:var(--ink);color:#fff;}
+  .slide.cream{background:var(--cream-soft);}
+  .slide.pink{background:var(--pink);}
+  .slide.accent{background:var(--accent);color:#fff;}
+
+  /* top bar */
+  .tbar{
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:18px;font-weight:500;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--ink-3);
+    padding-bottom:28px;border-bottom:1px solid var(--line);
+  }
+  .slide.dark .tbar{color:rgba(255,255,255,.55);border-color:rgba(255,255,255,.12);}
+  .slide.accent .tbar{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.25);}
+  .logo{display:flex;align-items:center;gap:12px;font-weight:600;color:var(--ink);letter-spacing:-0.01em;text-transform:none;font-size:20px;}
+  .slide.dark .logo,.slide.accent .logo{color:#fff;}
+  .logo .mark{width:44px;height:28px;display:inline-flex;align-items:center;justify-content:center;}
+  .logo .mark svg{width:100%;height:100%;display:block;}
+  .logo .mark svg path{fill:var(--ink);}
+  .slide.dark .logo .mark svg path,.slide.accent .logo .mark svg path{fill:#fff;}
+  .tag{display:inline-flex;align-items:center;gap:10px;}
+  .tag .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+
+  /* bottom bar */
+  .bbar{
+    margin-top:auto;display:flex;align-items:center;justify-content:space-between;
+    font-size:16px;color:var(--ink-3);letter-spacing:0.06em;text-transform:uppercase;
+    padding-top:24px;border-top:1px solid var(--line);
+  }
+  .slide.dark .bbar{color:rgba(255,255,255,.55);border-color:rgba(255,255,255,.12);}
+  .slide.accent .bbar{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.25);}
+  .pnum{font-variant-numeric:tabular-nums;}
+
+  /* type */
+  h1.eyebrow{font-size:22px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin:0;}
+  .slide.accent h1.eyebrow{color:#fff;opacity:.85;}
+  .title{font-size:88px;font-weight:600;line-height:0.98;letter-spacing:-0.035em;margin:0;color:var(--ink);}
+  .slide.dark .title,.slide.accent .title{color:#fff;}
+  .title-l{font-size:64px;font-weight:600;line-height:1.02;letter-spacing:-0.03em;margin:0;}
+  .subtitle{font-size:32px;line-height:1.32;color:var(--ink-2);font-weight:400;letter-spacing:-0.01em;margin:0;max-width:1200px;}
+  .slide.dark .subtitle,.slide.accent .subtitle{color:rgba(255,255,255,.78);}
+  .body{font-size:26px;line-height:1.45;color:var(--ink-2);font-weight:400;}
+  .small{font-size:22px;line-height:1.45;color:var(--ink-3);}
+  .display{font-family:'Inter';font-size:148px;font-weight:500;letter-spacing:-0.05em;line-height:0.92;}
+  .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-0.015em;}
+
+  .divider-row{display:flex;align-items:baseline;gap:24px;margin-top:28px;}
+  .divider-row .line{flex:1;height:1px;background:var(--line);}
+
+  /* pillar row */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+  .pillar{display:flex;flex-direction:column;gap:14px;}
+  .pillar .lbl{font-size:18px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-3);}
+  .pillar .hd{font-size:40px;font-weight:600;letter-spacing:-0.02em;line-height:1.05;}
+  .pillar .desc{font-size:22px;color:var(--ink-2);line-height:1.4;}
+  .slide.dark .pillar .lbl{color:rgba(255,255,255,.55);}
+  .slide.dark .pillar .desc{color:rgba(255,255,255,.75);}
+
+  /* number grid */
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);}
+  .stat{padding:36px 32px 40px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:14px;min-height:240px;}
+  .stat .num{font-size:84px;font-weight:500;letter-spacing:-0.04em;line-height:0.95;color:var(--ink);font-variant-numeric:tabular-nums;}
+  .stat .unit{font-size:30px;color:var(--ink-3);margin-left:-2px;}
+  .stat .lbl{font-size:22px;font-weight:600;color:var(--ink);letter-spacing:-0.005em;}
+  .stat .desc{font-size:18px;color:var(--ink-3);line-height:1.4;}
+  .stat.featured{background:var(--ink);color:#fff;}
+  .stat.featured .num{color:#fff;}
+  .stat.featured .lbl{color:#fff;}
+  .stat.featured .desc{color:rgba(255,255,255,.72);}
+  .stat.accent{background:var(--accent);color:#fff;}
+  .stat.accent .num,.stat.accent .lbl{color:#fff;}
+  .stat.accent .desc{color:rgba(255,255,255,.82);}
+
+  /* flow */
+  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;}
+  .flow-step{padding:28px 24px 28px 28px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:18px;position:relative;min-height:340px;}
+  .flow-step:first-child{border-left:0;padding-left:0;}
+  .flow-step .n{font-size:18px;font-weight:600;letter-spacing:0.2em;color:var(--accent);}
+  .flow-step .ic{width:52px;height:52px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;color:var(--accent);}
+  .flow-step .ic svg{width:26px;height:26px;}
+  .flow-step .ttl{font-size:26px;font-weight:600;line-height:1.15;letter-spacing:-0.01em;}
+  .flow-step ul{margin:0;padding-left:18px;font-size:18px;color:var(--ink-3);line-height:1.5;}
+  .flow-step ul li{margin-bottom:4px;}
+  .flow-arrow{position:absolute;right:-12px;top:56px;color:var(--line-2);font-size:22px;}
+
+  /* distribution 3-col */
+  .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
+  .three-col .col{padding:36px 32px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:22px;}
+  .three-col .col:last-child{border-right:0;}
+  .col-kicker{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);}
+  .col-kicker .num{font-size:14px;padding:4px 10px;border:1px solid var(--accent);border-radius:999px;}
+  .col h3{font-size:34px;font-weight:600;line-height:1.1;letter-spacing:-0.02em;margin:0;}
+  .col .sub{font-size:18px;color:var(--ink-3);line-height:1.5;}
+  .bullet{display:flex;flex-direction:column;gap:4px;padding-top:16px;border-top:1px solid var(--line);}
+  .bullet .bh{font-size:20px;font-weight:600;letter-spacing:-0.005em;}
+  .bullet .bd{font-size:17px;color:var(--ink-3);line-height:1.45;}
+
+  .badge{
+    display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid var(--accent);
+    color:var(--accent);border-radius:999px;font-size:16px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  }
+  .badge.solid{background:var(--accent);color:#fff;border-color:transparent;}
+  .badge.ink{background:var(--ink);color:#fff;border-color:transparent;}
+
+  /* benefits */
+  .bene-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);}
+  .bene{padding:32px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:12px;}
+  .bene .n{font-size:16px;font-weight:600;letter-spacing:0.2em;color:var(--ink-3);}
+  .bene .h{font-size:28px;font-weight:600;letter-spacing:-0.015em;line-height:1.12;}
+  .bene .d{font-size:18px;color:var(--ink-3);line-height:1.5;}
+  .bene.statement{background:var(--accent);color:#fff;grid-column:span 1;grid-row:span 1;justify-content:space-between;}
+  .bene.statement .big{font-size:88px;font-weight:500;letter-spacing:-0.04em;line-height:0.95;}
+  .bene.statement .n{color:rgba(255,255,255,.75);}
+  .bene.statement .h{color:#fff;}
+  .bene.statement .d{color:rgba(255,255,255,.85);}
+
+  /* case kpi tiles */
+  .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);}
+  .kpi{padding:22px 28px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px;min-height:140px;justify-content:center;}
+  .kpi .v{font-size:48px;font-weight:500;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums;}
+  .kpi .k{font-size:16px;font-weight:500;color:var(--ink-3);letter-spacing:0.06em;text-transform:uppercase;}
+  .kpi.hi{background:var(--ink);color:#fff;}
+  .kpi.hi .k{color:rgba(255,255,255,.65);}
+
+  /* pricing */
+  .price-card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:48px;display:flex;flex-direction:column;gap:24px;height:100%;}
+  .price-card.accent{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .price-card.accent .pprice{color:#fff;}
+  .price-card.accent .pcur{color:rgba(255,255,255,.7);}
+  .price-head{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .price-head .pname{font-size:34px;font-weight:600;letter-spacing:-0.02em;}
+  .price-head .pbadge{font-size:14px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:8px 14px;background:var(--accent);color:#fff;border-radius:999px;}
+  .pprice{display:flex;align-items:baseline;gap:10px;}
+  .pprice .pv{font-size:92px;font-weight:500;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;}
+  .pcur{font-size:24px;color:var(--ink-3);}
+  .per{font-size:22px;color:var(--ink-3);}
+  .incl{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+  .incl-item{display:flex;align-items:center;gap:14px;font-size:20px;}
+  .incl-item .chk{width:22px;height:22px;border-radius:50%;background:var(--pink);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .price-card.accent .chk{background:rgba(255,255,255,.15);}
+  .incl-item .chk svg{width:12px;height:12px;}
+
+  /* process steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
+  .step{padding:28px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:10px;min-height:160px;justify-content:center;position:relative;}
+  .step:last-child{border-right:0;}
+  .step .sn{font-size:16px;font-weight:600;letter-spacing:0.2em;color:var(--accent);}
+  .step .st{font-size:28px;font-weight:600;letter-spacing:-0.015em;}
+  .step-arr{position:absolute;right:-14px;top:50%;transform:translateY(-50%);background:var(--bg);padding:6px;color:var(--line-2);z-index:2;}
+
+  /* phone mockup */
+  .phone{width:340px;height:680px;border-radius:44px;background:#111;padding:10px;box-shadow:0 40px 80px -30px rgba(0,0,0,.35),0 10px 25px -10px rgba(0,0,0,.25);flex-shrink:0;position:relative;}
+  .phone::before{content:'';position:absolute;top:14px;left:50%;transform:translateX(-50%);width:110px;height:28px;background:#000;border-radius:999px;z-index:3;}
+  .phone-inner{width:100%;height:100%;border-radius:36px;overflow:hidden;background:var(--bg);position:relative;display:flex;flex-direction:column;}
+  .phone-status{padding:14px 24px 6px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;color:var(--ink);padding-top:18px;}
+  .phone-nav{padding:44px 20px 16px;display:flex;align-items:center;justify-content:space-between;}
+  .phone-nav .back{width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;}
+  .phone-brand{padding:0 20px 16px;}
+  .phone-brand .bname{font-size:22px;font-weight:700;letter-spacing:-0.02em;}
+  .phone-brand .bsub{font-size:12px;color:var(--ink-3);display:flex;align-items:center;gap:6px;margin-top:4px;}
+  .phone-brand .bsub .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);}
+  .phone-curated{margin:0 20px 10px;padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;gap:10px;}
+  .phone-curated .av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FF6334,#4397FF);}
+  .phone-curated .txt{font-size:11px;line-height:1.3;}
+  .phone-curated .txt b{display:block;font-size:13px;}
+  .phone-tabs{display:flex;gap:10px;padding:6px 20px 12px;font-size:12px;font-weight:500;color:var(--ink-3);}
+  .phone-tabs .t{padding:6px 12px;border-radius:999px;}
+  .phone-tabs .t.act{background:var(--ink);color:#fff;}
+  .phone-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 20px;flex:1;overflow:hidden;}
+  .phone-card{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
+  .phone-card .img{aspect-ratio:1;background:var(--cream);position:relative;}
+  .phone-card .img .heart{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;}
+  .phone-card .img .heart svg{width:12px;height:12px;color:var(--accent);}
+  .phone-card.fav .img .heart{background:var(--accent);}
+  .phone-card.fav .img .heart svg{color:#fff;}
+  .phone-card .meta{padding:6px 8px 8px;}
+  .phone-card .meta .pn{font-size:10px;font-weight:600;line-height:1.2;}
+  .phone-card .meta .pp{font-size:9px;color:var(--ink-3);margin-top:2px;}
+
+  /* notch for icon placeholders */
+  .ic-holder{width:100%;height:100%;background:linear-gradient(135deg,var(--pink),var(--pink-2));display:flex;align-items:center;justify-content:center;color:var(--accent-ink);font-weight:600;font-size:11px;}
+
+  /* hero */
+  .hero-split{display:grid;grid-template-columns:1.3fr 1fr;gap:80px;align-items:center;flex:1;}
+
+  /* rule-of-thumb helper to stretch rows */
+  .grow{flex:1;min-height:0;}
+
+  /* flow bottom callout */
+  .flow-cta{margin-top:32px;padding:28px 40px;background:var(--ink);color:#fff;border-radius:4px;display:flex;align-items:center;gap:28px;font-size:26px;font-weight:500;letter-spacing:-0.01em;}
+  .flow-cta .badge{border-color:rgba(255,255,255,.4);color:#fff;}
+
+  /* outro */
+  .outro{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:stretch;flex:1;}
+  .outro-left{display:flex;flex-direction:column;justify-content:space-between;}
+  .outro-right{background:var(--ink);color:#fff;border-radius:4px;padding:64px;display:flex;flex-direction:column;justify-content:space-between;}
+  .outro-right .contact-item{display:flex;flex-direction:column;gap:4px;}
+  .outro-right .cl{font-size:16px;color:rgba(255,255,255,.55);letter-spacing:0.16em;text-transform:uppercase;}
+  .outro-right .cv{font-size:32px;font-weight:500;}
+
+  /* tiny screenshot placeholder marker */
+  .ss-mark{
+    position:absolute;top:18px;left:18px;padding:4px 10px;font-size:11px;font-weight:600;
+    letter-spacing:0.12em;text-transform:uppercase;background:rgba(0,0,0,.6);color:#fff;border-radius:4px;z-index:5;
+  }
+  .slot-label{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+
+  /* sif pattern grid card */
+  .svc-list{display:flex;flex-direction:column;gap:16px;}
+  .svc{display:flex;align-items:flex-start;gap:16px;}
+  .svc .mk{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--ink);display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;margin-top:2px;}
+  .slide.dark .svc .mk{border-color:rgba(255,255,255,.85);color:#fff;}
+  .svc .txt{font-size:22px;line-height:1.35;}
+
+  /* hearts row */
+  .hearts{display:flex;gap:32px;flex-wrap:wrap;margin-top:12px;}
+  .heart-pill{display:inline-flex;align-items:center;gap:10px;font-size:20px;font-weight:500;color:var(--ink-2);}
+  .heart-pill .h{color:var(--accent);font-size:22px;}
+
+  /* incl lines on redesigned slide 8 */
+  .incl-line{display:flex;align-items:center;gap:10px;font-size:16px;color:var(--ink-2);}
+  .incl-line .chk-sm{width:18px;height:18px;border-radius:50%;background:var(--pink);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .incl-line .chk-sm svg{width:10px;height:10px;}
+
+  /* TWEAKS panel */
+  #tweaks{
+    position:fixed;right:20px;bottom:64px;z-index:2147483500;
+    background:#fff;border:1px solid var(--line-2);border-radius:12px;
+    padding:18px 20px;box-shadow:0 20px 50px -20px rgba(0,0,0,.25);
+    font-family:'Inter',sans-serif;font-size:14px;min-width:240px;display:none;
+  }
+  #tweaks h4{margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);}
+  #tweaks label{display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 0;color:var(--ink-2);}
+  #tweaks .note{font-size:12px;color:var(--ink-3);margin-top:10px;line-height:1.4;}
+  body.tweaks-open #tweaks{display:block;}
+  body.hide-price [data-price-only]{display:none !important;}
+  body.hide-price [data-price-hidden-replace]{display:flex !important;}
+  [data-price-hidden-replace]{display:none;}
+
+  /* custom toggle */
+  .toggle{appearance:none;width:40px;height:22px;border-radius:999px;background:#E2DDD6;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;}
+  .toggle::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+  .toggle:checked{background:var(--accent);}
+  .toggle:checked::after{transform:translateX(18px);}
+
+  /* ── MODE SWITCHER ── */
+  #cfg{
+    position:fixed;left:20px;bottom:20px;z-index:2147483600;
+    background:#fff;border:1px solid var(--line-2);border-radius:14px;
+    padding:14px 16px 12px;box-shadow:0 20px 50px -20px rgba(0,0,0,.28);
+    font-family:'Inter',sans-serif;font-size:13px;
+  }
+  #cfg h4{margin:0 0 10px;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-3);}
+  #cfg .mode-row{display:flex;gap:6px;flex-wrap:wrap;}
+  #cfg .mbtn{
+    padding:7px 13px;border-radius:999px;border:1px solid var(--line-2);
+    background:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:500;
+    cursor:pointer;color:var(--ink-2);transition:all .15s;white-space:nowrap;
+  }
+  #cfg .mbtn:hover{background:var(--bg);}
+  #cfg .mbtn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ============== SLIDE 1 · HERO ============== -->
+  <section data-label="Creator Takeover" class="slide">
+    <div class="tbar">
+      <div class="logo"><span class="mark"><svg viewBox="0 0 487 295" xmlns="http://www.w3.org/2000/svg" aria-label="Ønskeskyen"><path fill-rule="evenodd" clip-rule="evenodd" d="M404.485 117.284C393.395 117.38 381.922 118.462 371.705 122.571C374.789 115.038 376.234 107.013 376.139 99.0013C376.044 65.2569 348.761 37.6613 315.6 37.6613C295.834 37.6613 277.227 47.5354 265.769 64.0791C263.45 37.6476 223.345 0 177.839 0C88.6807 0 72.5841 95.5636 88.6807 122.557C58.6022 114.545 0 135.567 0 200.618C0 246.688 44.5381 276.722 82.8013 284.651C123.097 292.964 315.6 303.043 404.485 284.651C438.028 277.707 487 256.083 487 201.015C487 155.041 444.972 117.079 404.485 117.284Z"/></svg></span></div>
+      <div class="tag"><span class="dot"></span><span data-i18n="s1_tag">Creator Solutions · 2026</span></div>
+    </div>
+
+    <div class="hero-split" style="margin-top:30px;">
+      <div>
+        <h1 class="eyebrow">Creator Solutions</h1>
+        <div class="title" style="font-size:138px;margin-top:20px;">Creator<br/><span class="serif" style="font-size:142px;">Takeover</span></div>
+        <p class="subtitle" style="margin-top:28px;font-size:30px;max-width:900px;" data-i18n="s1_subtitle">Kombinerer Creator Marketing med Ønskeliste.<br/>Vi gør produktlister til kuraterede destinationer,<br/>der driver inspiration, ønsker og køb.</p>
+      </div>
+
+      <!-- hero phone -->
+      <div style="display:flex;justify-content:center;align-items:center;">
+        <div class="phone" style="transform:rotate(3deg) scale(1.05);">
+          <div class="phone-inner">
+            <div class="phone-status"><span>9:41</span><span>●●●●</span></div>
+            <div class="phone-nav">
+              <div class="back">←</div>
+              <div style="font-size:13px;font-weight:600;">Brand Wall</div>
+              <div style="width:36px;"></div>
+            </div>
+            <div class="phone-brand">
+              <div class="bname">Matas Natur</div>
+              <div class="bsub"><span class="dot"></span>Curated by Emma · 5 creators · 42 produkter</div>
+            </div>
+            <div class="phone-curated">
+              <div class="av"></div>
+              <div class="txt"><b>Emma Sørensen</b>Mine favoritter til ren hud – efteråret 2026</div>
+            </div>
+            <div class="phone-tabs">
+              <div class="t act">Alle</div><div class="t">Skincare</div><div class="t">Makeup</div><div class="t">Hår</div>
+            </div>
+            <div class="phone-grid">
+              <div class="phone-card fav"><div class="img" style="background:linear-gradient(135deg,#FFD9C9,#FFF0EB);"><div class="heart"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 14s-5-3.3-5-7a3 3 0 015-2.2A3 3 0 0113 7c0 3.7-5 7-5 7z"/></svg></div></div><div class="meta"><div class="pn">Nuxe Huile Prodigieuse</div><div class="pp">299 kr.</div></div></div>
+              <div class="phone-card"><div class="img" style="background:linear-gradient(135deg,#D4EBFB,#E9F5FD);"><div class="heart"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 14s-5-3.3-5-7a3 3 0 015-2.2A3 3 0 0113 7c0 3.7-5 7-5 7z"/></svg></div></div><div class="meta"><div class="pn">Weleda Skin Food</div><div class="pp">149 kr.</div></div></div>
+              <div class="phone-card"><div class="img" style="background:linear-gradient(135deg,#FFF0EB,#FFD9C9);"><div class="heart"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 14s-5-3.3-5-7a3 3 0 015-2.2A3 3 0 0113 7c0 3.7-5 7-5 7z"/></svg></div></div><div class="meta"><div class="pn">Rudolph Care Acai</div><div class="pp">399 kr.</div></div></div>
+              <div class="phone-card fav"><div class="img" style="background:linear-gradient(135deg,#D4EBFB,#FFF0EB);"><div class="heart"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 14s-5-3.3-5-7a3 3 0 015-2.2A3 3 0 0113 7c0 3.7-5 7-5 7z"/></svg></div></div><div class="meta"><div class="pn">Matas Naturligt Hår</div><div class="pp">79 kr.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- pillars -->
+    <div class="pillars" style="margin-top:36px;padding-top:28px;border-top:1px solid var(--line);">
+      <div class="pillar">
+        <div class="lbl">01 — Reach</div>
+        <div class="hd" style="font-size:34px;">Organisk &amp; Paid</div>
+        <div class="desc" style="font-size:20px;" data-i18n="s1_p1_desc">Push, activity feed, Spark Ads og creators egne kanaler i ét greb.</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">02 — Engagement</div>
+        <div class="hd" style="font-size:34px;" data-i18n="s1_p2_hd">Høj Retention</div>
+        <div class="desc" style="font-size:20px;" data-i18n="s1_p2_desc">Brugere gemmer til ønskeliste i stedet for at swipe videre.</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">03 — Performance</div>
+        <div class="hd" style="font-size:34px;" data-i18n="s1_p3_hd">Købsintention</div>
+        <div class="desc" style="font-size:20px;" data-i18n="s1_p3_desc">Hvert ønske er et permanent købssignal og grundlag for retargeting.</div>
+      </div>
+    </div>
+
+    <div class="bbar">
+      <span></span>
+      <span class="pnum">01 / 07</span>
+    </div>
+  </section>
+
+
+  <!-- ============== SLIDE 2 · PLATFORM OVERSIGT ============== -->
+  <section data-label="Platform Oversigt" class="slide">
+    <div class="tbar">
+      <div class="logo"><span class="mark"><svg viewBox="0 0 487 295" xmlns="http://www.w3.org/2000/svg" aria-label="Ønskeskyen"><path fill-rule="evenodd" clip-rule="evenodd" d="M404.485 117.284C393.395 117.38 381.922 118.462 371.705 122.571C374.789 115.038 376.234 107.013 376.139 99.0013C376.044 65.2569 348.761 37.6613 315.6 37.6613C295.834 37.6613 277.227 47.5354 265.769 64.0791C263.45 37.6476 223.345 0 177.839 0C88.6807 0 72.5841 95.5636 88.6807 122.557C58.6022 114.545 0 135.567 0 200.618C0 246.688 44.5381 276.722 82.8013 284.651C123.097 292.964 315.6 303.043 404.485 284.651C438.028 277.707 487 256.083 487 201.015C487 155.041 444.972 117.079 404.485 117.284Z"/></svg></span></div>
+      <div class="tag"><span class="dot"></span><span data-i18n="s2_tag">Data &amp; Performance</span></div>
+    </div>
+
+    <div style="margin-top:40px;">
+      <h1 class="eyebrow">02 — Platform</h1>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:60px;margin-top:20px;">
+        <h2 class="title" style="max-width:1100px;" data-i18n="s2_title">Platform Oversigt<br/>&amp; Rækkevidde</h2>
+        <p class="subtitle" style="max-width:620px;font-size:26px;" data-i18n="s2_subtitle">Nøgletal der driver jeres kampagnes succes — på tværs af hele Ønskeskyen-økosystemet.</p>
+      </div>
+    </div>
+
+    <div class="stat-grid grow" style="margin-top:50px;align-content:stretch;">
+      <div class="stat">
+        <div class="num">3,6<span class="unit">M</span></div>
+        <div class="lbl" data-i18n="s2_stat1_lbl">Brugere i DK</div>
+        <div class="desc" data-i18n="s2_stat1_desc">På tværs af hele platformen</div>
+      </div>
+      <div class="stat">
+        <div class="num">950</div>
+        <div class="lbl" data-i18n="s2_stat2_lbl">Creators i netværket</div>
+        <div class="desc" data-i18n="s2_stat2_desc">Aktive og klar til samarbejde</div>
+      </div>
+      <div class="stat">
+        <div class="num">41.200</div>
+        <div class="lbl" data-i18n="s2_stat3_lbl">Gns. reach pr. creator</div>
+        <div class="desc" data-i18n="s2_stat3_desc">Impressions i en kampagne</div>
+      </div>
+      <div class="stat featured">
+        <div class="num">1M<span class="unit">+</span></div>
+        <div class="lbl" data-i18n="s2_stat4_lbl">Push notifikation permissions</div>
+        <div class="desc" data-i18n="s2_stat4_desc">Direkte bruger-aktivering inapp</div>
+      </div>
+
+      <div class="stat">
+        <div class="num">75.000</div>
+        <div class="lbl" data-i18n="s2_stat5_lbl">Gns. brand wall-følgere</div>
+        <div class="desc" data-i18n="s2_stat5_desc">Top 50 brands i appen</div>
+      </div>
+      <div class="stat">
+        <div class="num">650k</div>
+        <div class="lbl" data-i18n="s2_stat6_lbl">Email-tilladelser (DK)</div>
+        <div class="desc" data-i18n="s2_stat6_desc">Kvalificerede og segmenterbare</div>
+      </div>
+      <div class="stat">
+        <div class="num">17M<span class="unit">+</span></div>
+        <div class="lbl" data-i18n="s2_stat7_lbl">Globale brugere</div>
+        <div class="desc" data-i18n="s2_stat7_desc">Total brugerbase på tværs af markeder</div>
+      </div>
+      <div class="stat accent">
+        <div class="lbl" style="letter-spacing:0.18em;text-transform:uppercase;font-size:16px;opacity:.85;" data-i18n="s2_stat8_lbl">Oprettet ønsker</div>
+        <div class="num" style="font-size:51px;">700m+</div>
+      </div>
+    </div>
+
+    <div class="bbar">
+      <span></span>
+      <span class="pnum">02 / 07</span>
+    </div>
+  </section>
+
+
+  <!-- ============== SLIDE 3 · KONCEPT ============== -->
+  <section data-label="Creator Curated Brand Wall" class="slide">
+    <div class="tbar">
+      <div class="logo"><span class="mark"><svg viewBox="0 0 487 295" xmlns="http://www.w3.org/2000/svg" aria-label="Ønskeskyen"><path fill-rule="evenodd" clip-rule="evenodd" d="M404.485 117.284C393.395 117.38 381.922 118.462 371.705 122.571C374.789 115.038 376.234 107.013 376.139 99.0013C376.044 65.2569 348.761 37.6613 315.6 37.6613C295.834 37.6613 277.227 47.5354 265.769 64.0791C263.45 37.6476 223.345 0 177.839 0C88.6807 0 72.5841 95.5636 88.6807 122.557C58.6022 114.545 0 135.567 0 200.618C0 246.688 44.5381 276.722 82.8013 284.651C123.097 292.964 315.6 303.043 404.485 284.651C438.028 277.707 487 256.083 487 201.015C487 155.041 444.972 117.079 404.485 117.284Z"/></svg></span></div>
+      <div class="tag"><span class="dot"></span><span data-i18n="s3_tag">Koncept &amp; Værdi</span></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 420px;gap:80px;margin-top:40px;flex:1;">
+      <div style="display:flex;flex-direction:column;">
+        <h1 class="eyebrow">03 — Konceptet</h1>
+        <h2 class="title" style="margin-top:24px;max-width:1000px;">Creator Curated<br/>Brand Wall.</h2>
+        <p class="subtitle" style="margin-top:36px;max-width:900px;">
+          <span data-i18n="s3_subtitle">I stedet for en flygtig annonce, skaber vi en fast destination på jeres Brand Wall, hvor Creator Marketing og performance smelter sammen.</span>
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:auto;padding-top:60px;border-top:1px solid var(--line);">
+          <div>
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--pink);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+            </div>
+            <div style="font-size:24px;font-weight:600;letter-spacing:-0.015em;line-height:1.15;" data-i18n="s3_f1_title">Fra generisk<br/>til personlig</div>
+            <div class="small" style="margin-top:12px;" data-i18n="s3_f1_desc">"Matas Natur" bliver til "Curated by Emma". Creatoren låner sin troværdighed til listen.</div>
+          </div>
+          <div>
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--pink);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            </div>
+            <div style="font-size:24px;font-weight:600;letter-spacing:-0.015em;line-height:1.15;" data-i18n="s3_f2_title">Brand Wall<br/>som destination</div>
+            <div class="small" style="margin-top:12px;" data-i18n="s3_f2_desc">Brugerne lander i jeres eget univers — ser produkter, deals og gemmer favoritter.</div>
+          </div>
+          <div>
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--pink);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12a8 8 0 0116 0"/><path d="M4 12a8 8 0 0016 0" opacity=".4"/><circle cx="12" cy="12" r="2.5"/></svg>
+            </div>
+            <div style="font-size:24px;font-weight:600;letter-spacing:-0.015em;line-height:1.15;" data-i18n="s3_f3_title">Retention<br/>&amp; genbesøg</div>
+            <div class="small" style="margin-top:12px;" data-i18n="s3_f3_desc">Brugere bygger ønskelister over tid — modsat et flygtigt swipe på TikTok.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- phone -->
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <div class="phone" style="height:740px;">
+          <div class="phone-inner" style="padding:0;background:#fff;overflow:hidden;">
+            <img src="assets/slide3-phone.png" alt="Brand Wall screenshot" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#fff;" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bbar">
+      <span></span>
+      <span class="pnum">03 / 07</span>
+    </div>
+  </section>
+
+
+  <!-- ============== SLIDE 4 · FLOW ============== -->
+  <section data-label="Fra SoMe til Ønske" class="slide">
+    <div class="tbar">
+      <div class="logo"><span class="mark"><svg viewBox="0 0 487 295" xmlns="http://www.w3.org/2000/svg" aria-label="Ønskeskyen"><path fill-rule="evenodd" clip-rule="evenodd" d="M404.485 117.284C393.395 117.38 381.922 118.462 371.705 122.571C374.789 115.038 376.234 107.013 376.139 99.0013C376.044 65.2569 348.761 37.6613 315.6 37.6613C295.834 37.6613 277.227 47.5354 265.769 64.0791C263.45 37.6476 223.345 0 177.839 0C88.6807 0 72.5841 95.5636 88.6807 122.557C58.6022 114.545 0 135.567 0 200.618C0 246.688 44.5381 276.722 82.8013 284.651C123.097 292.964 315.6 303.043 404.485 284.651C438.028 277.707 487 256.083 487 201.015C487 155.041 444.972 117.079 404.485 117.284Z"/></svg></span></div>
+      <div class="tag"><span class="dot"></span><span data-i18n="s4_tag">Customer Journey</span></div>
+    </div>
+
+    <div style="margin-top:40px;">
+      <h1 class="eyebrow">04 — Journey</h1>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:60px;margin-top:20px;">
+        <h2 class="title" style="max-width:1100px;" data-i18n="s4_title">Fra SoMe-Content<br/>til Oprettet Ønske.</h2>
+        <p class="subtitle" style="max-width:620px;font-size:26px;" data-i18n="s4_subtitle">Sådan forvandler vi en shortform video til et målbart ønske og en langvarig inspirationskanal.</p>
+      </div>
+    </div>
+
+    <div class="flow" style="margin-top:60px;border-top:1px solid var(--line);padding-top:32px;">
+      <div class="flow-step">
+        <div class="n">01</div>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M22 8l-6 4 6 4V8z"/></svg></div>
+        <div class="ttl" data-i18n="s4_step1_title">SoMe Content Skabes</div>
+        <ul>
+          <li data-i18n="s4_s1_li1">Creator producerer autentisk video</li>
+          <li data-i18n="s4_s1_li2">TikTok / Reels / Shorts</li>
+          <li data-i18n="s4_s1_li3">Brandets produkter i fokus</li>
+        </ul>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="n">02</div>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11h3l6-6v14l-6-6H3z"/><path d="M16 8a5 5 0 010 8" opacity=".6"/><path d="M19 5a9 9 0 010 14" opacity=".3"/></svg></div>
+        <div class="ttl" data-i18n="s4_step2_title">Distribution &amp; Boosting</div>
+        <ul>
+          <li data-i18n="s4_s2_li1">Organisk post fra creators</li>
+          <li data-i18n="s4_s2_li2">Spark Ads til udvidet målgruppe</li>
+          <li data-i18n="s4_s2_li3">Push til 700.000+ DK-brugere</li>
+        </ul>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="n">03</div>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg></div>
+        <div class="ttl" data-i18n="s4_step3_title">Landing på Brand Wall</div>
+        <ul>
+          <li data-i18n="s4_s3_li1">Swipe-up / link-in-bio / push</li>
+          <li data-i18n="s4_s3_li2">Ind i brandets eget univers</li>
+          <li data-i18n="s4_s3_li3">Creator-kurateret destination</li>
+        </ul>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="n">04</div>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></div>
+        <div class="ttl" data-i18n="s4_step4_title">Browse &amp; Inspiration</div>
+        <ul>
+          <li data-i18n="s4_s4_li1">Udforsker hele curated liste</li>
+          <li data-i18n="s4_s4_li2">Ser deals og relaterede produkter</li>
+          <li data-i18n="s4_s4_li3">Gemmer favoritter</li>
+        </ul>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step" style="background:var(--pink);padding:28px 24px;border-radius:4px;border-left:0;margin-left:-1px;">
+        <div class="n" style="color:var(--accent);">05</div>
+        <div class="ic" style="background:var(--accent);color:#fff;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a5 5 0 019-3 5 5 0 019 3c0 5.5-7 10-7 10h-4z"/></svg></div>
+        <div class="ttl" data-i18n="s4_step5_title">Ønske Oprettes = Købsintention</div>
+        <ul style="color:var(--ink-2);">
+          <li data-i18n="s4_s5_li1">Produkt tilføjes til ønskeliste</li>
+          <li data-i18n="s4_s5_li2">Permanent købssignal</li>
+          <li data-i18n="s4_s5_li3">Grundlag for retargeting</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flow-cta">
+      <span class="badge" style="border-color:rgba(255,255,255,.4);">Resultat</span>
+      <span data-i18n="s4_cta">Fra <b>3 sekunders attention</b> på SoMe → til en <b>permanent relation</b> i appen.</span>
+    </div>
+
+    <div class="bbar">
+      <span></span>
+      <span class="pnum">04 / 07</span>
+    </div>
+  </section>
+
+
+  <!-- ============== SLIDE 5 · HVORFOR (merged) ============== -->
+  <section data-label="Hvorfor Creator Takeover" class="slide">
+    <div class="tbar">
+      <div class="logo"><span class="mark"><svg viewBox="0 0 487 295" xmlns="http://www.w3.org/2000/svg" aria-label="Ønskeskyen"><path fill-rule="evenodd" clip-rule="evenodd" d="M404.485 117.284C393.395 117.38 381.922 118.462 371.705 122.571C374.789 115.038 376.234 107.013 376.139 99.0013C376.044 65.2569 348.761 37.6613 315.6 37.6613C295.834 37.6613 277.227 47.5354 265.769 64.0791C263.45 37.6476 223.345 0 177.839 0C88.6807 0 72.5841 95.5636 88.6807 122.557C58.6022 114.545 0 135.567 0 200.618C0 246.688 44.5381 276.722 82.8013 284.651C123.097 292.964 315.6 303.043 404.485 284.651C438.028 277.707 487 256.083 487 201.015C487 155.041 444.972 117.079 404.485 117.284Z"/></svg></span></div>
+      <div class="tag"><span class="dot"></span><span data-i18n="s5_tag">Hvorfor det virker</span></div>
+    </div>
+
+    <div style="margin-top:36px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;">
+      <div>
+        <h1 class="eyebrow">05 — Hvorfor</h1>
+        <h2 class="title" style="margin-top:18px;max-width:1200px;font-size:84px;line-height:1.02;" data-i18n="s5_title">Branding, retention<br/>og performance —<br/><span class="serif" style="color:var(--accent);">i samme kampagne.</span></h2>
+      </div>
+      <p class="subtitle" style="max-width:460px;font-size:22px;line-height:1.4;" data-i18n="s5_subtitle">Creator Takeover samler paid, organic og creator-trust i én aktivering — med varig værdi over tid.</p>
+    </div>
+
+    <!-- HERO STAT -->
+    <div style="margin-top:36px;background:var(--ink);color:#fff;border-radius:10px;padding:36px 44px;display:grid;grid-template-columns:auto 1fr auto;gap:48px;align-items:center;">
+      <div style="display:flex;align-items:baseline;gap:10px;">
+        <span class="serif" style="font-size:130px;line-height:0.9;font-weight:400;color:var(--accent);letter-spacing:-0.04em;">5×</span>
+      </div>
+      <div>
+        <div style="font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:600;" data-i18n="s5_hero_sub">Sammenlagt effekt</div>
+        <div style="font-size:32px;font-weight:500;letter-spacing:-0.015em;line-height:1.2;margin-top:6px;" data-i18n="s5_hero_desc">Paid&nbsp;+&nbsp;organic&nbsp;+&nbsp;creator&nbsp;trust.<br/><span style="color:rgba(255,255,255,.7);">Markant højere reach end enkeltkanaler.</span></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-direction:column;align-items:flex-end;">
+        <span style="font-size:13px;padding:7px 14px;background:rgba(255,255,255,.12);border-radius:999px;color:#fff;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Paid</span>
+        <span style="font-size:13px;padding:7px 14px;background:rgba(255,255,255,.12);border-radius:999px;color:#fff;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Organic</span>
+        <span style="font-size:13px;padding:7px 14px;background:var(--accent);border-radius:999px;color:#fff;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Creator Trust</span>
+      </div>
+    </div>
+
+    <!-- 4 REASON CARDS -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px;flex:1;min-height:0;">
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px 24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:42px;height:42px;border-radius:10px;background:var(--pink);color:var(--accent);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-8-5-8-11a5 5 0 019-3 5 5 0 019 3c0 6-8 11-8 11z"/><path d="M12 21V10"/></svg>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);" data-i18n="s5_c1_kicker">01 · Ejerskab</div>
+          <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1.2;margin-top:4px;" data-i18n="s5_c1_title">En permanent destination</div>
+        </div>
+        <div style="font-size:15px;color:var(--ink-2);line-height:1.5;" data-i18n="s5_c1_desc">Content lever videre på jeres Brand Wall — det akkumulerer trafik i stedet for at forsvinde som en flygtig annonce.</div>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px 24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:42px;height:42px;border-radius:10px;background:var(--blue-soft);color:var(--accent-2);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12l5 5L20 6"/><circle cx="4" cy="12" r="0.5" fill="currentColor"/></svg>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-2);" data-i18n="s5_c2_kicker">02 · Intention</div>
+          <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1.2;margin-top:4px;" data-i18n="s5_c2_title">Køb-klare brugere</div>
+        </div>
+        <div style="font-size:15px;color:var(--ink-2);line-height:1.5;" data-i18n="s5_c2_desc">Brugere <em>gemmer</em> produkter frem for at swipe videre — stærkere købsintention og højere retention.</div>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px 24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:42px;height:42px;border-radius:10px;background:var(--slate-tint);color:var(--ink);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M3 21a9 9 0 0118 0"/></svg>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);" data-i18n="s5_c3_kicker">03 · Reach</div>
+          <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1.2;margin-top:4px;" data-i18n="s5_c3_title">Organisk følgerbase</div>
+        </div>
+        <div style="font-size:15px;color:var(--ink-2);line-height:1.5;" data-i18n="s5_c3_desc">Ram eksisterende følgere direkte — brands som Matas aktiverer 350.000+ uden ekstra annoncekroner.</div>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px 24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:42px;height:42px;border-radius:10px;background:var(--blue-tint);color:var(--accent-2);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/><circle cx="7" cy="13" r="1" fill="currentColor"/></svg>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-2);" data-i18n="s5_c4_kicker">04 · Rettigheder</div>
+          <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1.2;margin-top:4px;" data-i18n="s5_c4_title">Content I ejer</div>
+        </div>
+        <div style="font-size:15px;color:var(--ink-2);line-height:1.5;" data-i18n="s5_c4_desc">Professionelt creator-content med fulde rettigheder — genbrug frit på jeres egne kanaler og i egen paid-strategi.</div>
+      </div>
+
+    </div>
+
+    <div class="bbar">
+      <span></span>
+      <span class="pnum">05 / 07</span>
+    </div>
+  </section>
+
+
+  <!-- ============== SLIDE 7 · CASE STUDY ============== -->
+  <section data-label="Case Study Matas Natur" class="slide cream">
+    <div class="tbar">
+      <div class="logo"><span class="mark"><svg viewBox="0 0 487 295" xmlns="http://www.w3.org/2000/svg" aria-label="Ønskeskyen"><path fill-rule="evenodd" clip-rule="evenodd" d="M404.485 117.284C393.395 117.38 381.922 118.462 371.705 122.571C374.789 115.038 376.234 107.013 376.139 99.0013C376.044 65.2569 348.761 37.6613 315.6 37.6613C295.834 37.6613 277.227 47.5354 265.769 64.0791C263.45 37.6476 223.345 0 177.839 0C88.6807 0 72.5841 95.5636 88.6807 122.557C58.6022 114.545 0 135.567 0 200.618C0 246.688 44.5381 276.722 82.8013 284.651C123.097 292.964 315.6 303.043 404.485 284.651C438.028 277.707 487 256.083 487 201.015C487 155.041 444.972 117.079 404.485 117.284Z"/></svg></span></div>
+      <div class="tag"><span class="dot"></span><span data-i18n="s6_tag">Proof of Concept</span></div>
+    </div>
+
+    <div style="margin-top:40px;">
+      <h1 class="eyebrow">06 — Case Study</h1>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-top:20px;">
+        <h2 class="title" style="max-width:1200px;" data-var="CASE_BRAND_NAME">Case Study:<br/>Matas Natur.</h2>
+        <div style="text-align:right;">
+          <div class="small" style="letter-spacing:0.14em;text-transform:uppercase;font-size:18px;" data-i18n="s6_cat_lbl">Kategori</div>
+          <div style="font-size:28px;font-weight:500;margin-top:6px;" data-var="CASE_CATEGORY">Beauty &amp; Personal Care</div>
+          <div class="small" style="letter-spacing:0.14em;text-transform:uppercase;font-size:18px;margin-top:16px;" data-i18n="s6_per_lbl">Periode</div>
+          <div style="font-size:28px;font-weight:500;margin-top:6px;" data-var="CASE_TIMEFRAME">Sep – Okt 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:380px 1fr;gap:48px;margin-top:28px;">
+      <!-- left: brand + setup + challenge -->
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="background:#fff;border-radius:4px;padding:22px 26px;border:1px solid var(--line);">
+          <div class="small" style="letter-spacing:0.14em;text-transform:uppercase;font-size:15px;" data-i18n="s6_brand_lbl">Brand</div>
+          <div style="font-size:32px;font-weight:600;letter-spacing:-0.02em;margin-top:4px;" data-var="CASE_BRAND_NAME">Matas</div>
+        </div>
+        <div style="background:#fff;border-radius:4px;padding:22px 26px;border:1px solid var(--line);">
+          <div class="small" style="letter-spacing:0.14em;text-transform:uppercase;font-size:15px;" data-i18n="s6_campaign_lbl">Kampagne</div>
+          <div style="font-size:22px;font-weight:500;margin-top:4px;line-height:1.2;" data-var="CASE_CAMPAIGN_NAME">Matas Natur — Curated by Emma</div>
+          <div style="display:flex;gap:14px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);">
+            <div><div class="small" style="font-size:13px;text-transform:uppercase;letter-spacing:0.12em;" data-i18n="s6_setup_lbl">Setup</div><div style="font-size:20px;font-weight:600;margin-top:2px;"><span data-var="CASE_NUM_CREATORS">5</span> creators</div></div>
+            <div style="width:1px;background:var(--line);"></div>
+            <div><div class="small" style="font-size:13px;text-transform:uppercase;letter-spacing:0.12em;" data-i18n="s6_duration_lbl">Varighed</div><div style="font-size:20px;font-weight:600;margin-top:2px;" data-var="CASE_DURATION">4 uger</div></div>
+          </div>
+        </div>
+        <div style="background:var(--ink);color:#fff;border-radius:4px;padding:22px 26px;">
+          <div style="font-size:15px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,.6);" data-i18n="s6_challenge_lbl">Challenge</div>
+          <div style="font-size:18px;line-height:1.4;margin-top:8px;" data-var="CASE_CHALLENGE_TEXT">Matas ville aktivere en loyal følgerbase og drive målbare ønsker i kategorien "Natur" — uden at brænde budget på flygtige annoncer.</div>
+        </div>
+      </div>
+
+      <!-- right: results -->
+      <div style="display:flex;flex-direction:column;">
+        <div class="small" style="letter-spacing:0.14em;text-transform:uppercase;font-size:15px;margin-bottom:10px;" data-i18n="s6_results_lbl">Resultater</div>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="v" data-var="CASE_REACH">350K+</div><div class="k" data-i18n="s6_kpi1_lbl">Direkte reach</div></div>
+          <div class="kpi"><div class="v" data-var="CASE_IMPRESSIONS">206K</div><div class="k" data-i18n="s6_kpi2_lbl">Impressions / creator</div></div>
+          <div class="kpi hi"><div class="v" data-var="CASE_WISHES">+12.400</div><div class="k" data-i18n="s6_kpi3_lbl">Ønsker tilføjet</div></div>
+          <div class="kpi"><div class="v" data-var="CASE_ENGAGEMENT_RATE">8,4%</div><div class="k" data-i18n="s6_kpi4_lbl">Engagement rate</div></div>
+          <div class="kpi"><div class="v" data-var="CASE_FOLLOWER_REACH">350K</div><div class="k" data-i18n="s6_kpi5_lbl">Brand wall-følgere</div></div>
+          <div class="kpi"><div class="v" data-var="CASE_ROI">+38%</div><div class="k" data-i18n="s6_kpi6_lbl">Uplift vs. baseline</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- full-width quote row -->
+    <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:32px;">
+      <div class="serif" style="font-size:36px;line-height:1.2;letter-spacing:-0.02em;font-weight:400;flex:1;">
+        "<span data-var="CASE_QUOTE">Creator Takeover gav os både autentisk content og målbar effekt på ønskelisten.</span>"
+      </div>
+      <div style="font-size:17px;color:var(--ink-3);text-align:right;flex-shrink:0;max-width:280px;">
+        <div style="color:var(--ink);font-weight:600;" data-var="CASE_QUOTE_AUTHOR">[Kontaktperson]</div>
+        <div data-var="CASE_QUOTE_TITLE">Head of Brand, Matas</div>
+      </div>
+    </div>
+
+    <div class="bbar">
+      <span></span>
+      <span class="pnum">06 / 07</span>
+    </div>
+  </section>
+
+
+  <!-- ============== SLIDE 7 · INVESTERING ============== -->
+  <section data-label="Investering og Proces" class="slide">
+    <div class="tbar">
+      <div class="logo"><span class="mark"><svg viewBox="0 0 487 295" xmlns="http://www.w3.org/2000/svg" aria-label="Ønskeskyen"><path fill-rule="evenodd" clip-rule="evenodd" d="M404.485 117.284C393.395 117.38 381.922 118.462 371.705 122.571C374.789 115.038 376.234 107.013 376.139 99.0013C376.044 65.2569 348.761 37.6613 315.6 37.6613C295.834 37.6613 277.227 47.5354 265.769 64.0791C263.45 37.6476 223.345 0 177.839 0C88.6807 0 72.5841 95.5636 88.6807 122.557C58.6022 114.545 0 135.567 0 200.618C0 246.688 44.5381 276.722 82.8013 284.651C123.097 292.964 315.6 303.043 404.485 284.651C438.028 277.707 487 256.083 487 201.015C487 155.041 444.972 117.079 404.485 117.284Z"/></svg></span></div>
+      <div class="tag"><span class="dot"></span><span data-i18n="s7_tag">Pakke &amp; Proces</span></div>
+    </div>
+
+    <div style="margin-top:36px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;">
+      <div>
+        <h1 class="eyebrow">07 — Investering</h1>
+        <h2 class="title" style="margin-top:18px;max-width:1200px;font-size:70px;line-height:1.02;" data-i18n="s7_title">Én pakke. <span class="serif" style="color:var(--accent);">Tre kanaler.</span><br/>Alt hvad I får.</h2>
+      </div>
+      <p class="subtitle" style="max-width:420px;font-size:20px;line-height:1.4;" data-i18n="s7_subtitle">Creator Curated-pakken aktiverer alle tre kanaler samtidigt — med full service fra brief til rapport.</p>
+    </div>
+
+    <!-- PRICE STRIP -->
+    <div style="margin-top:28px;background:var(--ink);color:#fff;border-radius:12px;padding:26px 36px;display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center;">
+      <div>
+        <div style="font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:600;" data-i18n="s7_pkg_lbl">Pakke</div>
+        <div style="font-size:28px;font-weight:500;letter-spacing:-0.02em;margin-top:2px;">Creator Curated</div>
+      </div>
+      <div data-price-only style="display:flex;align-items:baseline;gap:10px;">
+        <span style="font-size:16px;color:rgba(255,255,255,.6);">DKK</span>
+        <span class="serif" style="font-size:84px;font-weight:400;letter-spacing:-0.04em;line-height:0.9;font-variant-numeric:tabular-nums;">8.995</span>
+        <span style="font-size:16px;color:rgba(255,255,255,.6);margin-left:6px;" data-i18n="s7_price_unit">pr. creator · minimum  3+</span>
+      </div>
+      <div data-price-hidden-replace style="flex-direction:column;gap:2px;align-items:flex-start;">
+        <div class="serif" style="font-size:44px;font-weight:400;letter-spacing:-0.02em;line-height:1;">Skalerbar pakke</div>
+        <div style="font-size:15px;color:rgba(255,255,255,.6);">Pris efter aftale</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;">
+        <div style="text-align:right;">
+          <div style="font-size:22px;font-weight:500;letter-spacing:-0.02em;"></div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);letter-spacing:0.08em;text-transform:uppercase;margin-top:2px;">Creators</div>
+        </div>
+        <div style="width:1px;height:32px;background:rgba(255,255,255,.15);"></div>
+        <div style="text-align:right;">
+          <div style="font-size:22px;font-weight:500;letter-spacing:-0.02em;" data-i18n="s7_dur_val">4 uger</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);letter-spacing:0.08em;text-transform:uppercase;margin-top:2px;" data-i18n="s7_dur_lbl">Kampagne</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THREE CHANNELS -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;flex:1;min-height:0;">
+
+      <!-- In-App -->
+      <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px 28px;display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="width:44px;height:44px;border-radius:10px;background:var(--blue-soft);color:var(--accent-2);display:flex;align-items:center;justify-content:center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg>
+          </div>
+          <span style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-2);" data-i18n="s7_ch1_kicker">Kanal 01</span>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);" data-i18n="s7_ch1_type">Organisk</div>
+          <div style="font-size:26px;font-weight:600;letter-spacing:-0.015em;line-height:1.1;margin-top:4px;" data-i18n="s7_ch1_title">In-App Aktivering</div>
+        </div>
+        <div style="font-size:14px;color:var(--ink-3);line-height:1.5;" data-i18n="s7_ch1_desc">Permanent placering i appens naturlige flows — uden annoncekroner.</div>
+        <div style="display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line);">
+          <div class="incl-line" style="font-size:14px;"><span class="chk-sm" style="width:18px;height:18px;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch1_i1">Brand Wall opsætning</span></div>
+          <div class="incl-line" style="font-size:14px;"><span class="chk-sm" style="width:18px;height:18px;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch1_i2">Activity feed eksponering</span></div>
+          <div class="incl-line" style="font-size:14px;"><span class="chk-sm" style="width:18px;height:18px;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch1_i3">Trending-univers</span></div>
+          <div class="incl-line" style="font-size:14px;"><span class="chk-sm" style="width:18px;height:18px;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch1_i4">Push notifications</span></div>
+        </div>
+      </div>
+
+      <!-- Content / Brand Wall -->
+      <div style="background:var(--accent);color:#fff;border-radius:12px;padding:26px 28px;display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="width:44px;height:44px;border-radius:10px;background:#fff;color:var(--accent);display:flex;align-items:center;justify-content:center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 9l4 3 4-3"/></svg>
+          </div>
+          <span style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#fff;" data-i18n="s7_ch2_kicker">Kanal 02</span>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,.7);" data-i18n="s7_ch2_type">Content</div>
+          <div style="font-size:26px;font-weight:600;letter-spacing:-0.015em;line-height:1.1;margin-top:4px;" data-i18n="s7_ch2_title">Curated Brand Wall</div>
+        </div>
+        <div style="font-size:14px;color:rgba(255,255,255,.82);line-height:1.5;" data-i18n="s7_ch2_desc">Professionelt creator-content produceret og kurateret til jeres brand.</div>
+        <div style="display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid rgba(255,255,255,.22);">
+          <div class="incl-line" style="font-size:14px;color:#fff;"><span style="width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch2_i1">Creator booking &amp; briefing</span></div>
+          <div class="incl-line" style="font-size:14px;color:#fff;"><span style="width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch2_i2">Content produktion (video)</span></div>
+          <div class="incl-line" style="font-size:14px;color:#fff;"><span style="width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch2_i3">Fulde rettigheder</span></div>
+          <div class="incl-line" style="font-size:14px;color:#fff;"><span style="width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch2_i4">Ønskedata-rapportering</span></div>
+        </div>
+      </div>
+
+      <!-- Paid -->
+      <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px 28px;display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="width:44px;height:44px;border-radius:10px;background:var(--pink);color:var(--accent);display:flex;align-items:center;justify-content:center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11h3l6-6v14l-6-6H3z"/><path d="M16 8a5 5 0 010 8"/></svg>
+          </div>
+          <span style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);" data-i18n="s7_ch3_kicker">Kanal 03</span>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);" data-i18n="s7_ch3_type">Skalering</div>
+          <div style="font-size:26px;font-weight:600;letter-spacing:-0.015em;line-height:1.1;margin-top:4px;" data-i18n="s7_ch3_title">Paid Boosting</div>
+        </div>
+        <div style="font-size:14px;color:var(--ink-3);line-height:1.5;" data-i18n="s7_ch3_desc">Spark Ads boost af creator-videoer — autentisk, native format.</div>
+        <div style="display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line);">
+          <div class="incl-line" style="font-size:14px;"><span class="chk-sm" style="width:18px;height:18px;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch3_i1">Spark Ads setup</span></div>
+          <div class="incl-line" style="font-size:14px;"><span class="chk-sm" style="width:18px;height:18px;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch3_i2">Boost af creator-konto</span></div>
+          <div class="incl-line" style="font-size:14px;"><span class="chk-sm" style="width:18px;height:18px;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch3_i3">Udvidet målgruppe</span></div>
+          <div class="incl-line" style="font-size:14px;"><span class="chk-sm" style="width:18px;height:18px;"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" style="width:10px;height:10px;"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="s7_ch3_i4">Genbrug i egen paid-strategi</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PROCESS STRIP -->
+    <div style="margin-top:18px;padding:16px 28px;background:var(--slate-tint);border-radius:10px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;">
+      <div style="font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-3);font-weight:700;" data-i18n="s7_role_lbl">Jeres rolle</div>
+      <div style="display:flex;align-items:center;gap:14px;font-size:15px;color:var(--ink);font-weight:500;">
+        <span data-i18n="s7_step1"><span style="color:var(--accent);font-weight:700;">01</span> Vælg produkter</span>
+        <span style="color:var(--ink-3);">→</span>
+        <span data-i18n="s7_step2"><span style="color:var(--accent);font-weight:700;">02</span> Vi producerer</span>
+        <span style="color:var(--ink-3);">→</span>
+        <span data-i18n="s7_step3"><span style="color:var(--accent);font-weight:700;">03</span> Godkend videoer</span>
+        <span style="color:var(--ink-3);">→</span>
+        <span data-i18n="s7_step4"><span style="color:var(--accent);font-weight:700;">04</span> Modtag slutrapport</span>
+      </div>
+    </div>
+
+    <div class="bbar">
+      <span></span>
+      <span class="pnum">07 / 07</span>
+    </div>
+  </section>
+
+
+</deck-stage>
+
+<!-- ============ MODE SWITCHER ============ -->
+<div id="cfg">
+  <h4>Præsentation</h4>
+  <div class="mode-row">
+    <button class="mbtn active" data-mode="onskeskyen-da">Ønskeskyen DK</button>
+    <button class="mbtn" data-mode="onskeskyen-en">Ønskeskyen EN</button>
+    <button class="mbtn" data-mode="gowish-en">Gowish EN</button>
+  </div>
+</div>
+
+<!-- ============ TWEAKS PANEL ============ -->
+<div id="tweaks">
+  <h4>Tweaks</h4>
+  <label>
+    <input type="checkbox" class="toggle" id="tw-price" checked />
+    <span>Vis priser</span>
+  </label>
+  <div class="note">Skjuler 8.995 kr./creator på investeringssliden. Resten af pakken vises.</div>
+</div>
+
+<script>
+  /* ── CONTENT ── */
+  const DA = {
+    lang:'da', page_title:'Ønskeskyen · Creator Takeover 2026',
+    s1_tag:'Creator Solutions · 2026',
+    s1_subtitle:'Kombinerer Creator Marketing med Ønskeliste.<br/>Vi gør produktlister til kuraterede destinationer,<br/>der driver inspiration, ønsker og køb.',
+    s1_p1_desc:'Push, activity feed, Spark Ads og creators egne kanaler i ét greb.',
+    s1_p2_hd:'Høj Retention', s1_p2_desc:'Brugere gemmer til ønskeliste i stedet for at swipe videre.',
+    s1_p3_hd:'Købsintention', s1_p3_desc:'Hvert ønske er et permanent købssignal og grundlag for retargeting.',
+    s2_tag:'Data &amp; Performance', s2_title:'Platform Oversigt<br/>&amp; Rækkevidde',
+    s2_subtitle:'Nøgletal der driver jeres kampagnes succes — på tværs af hele Ønskeskyen-økosystemet.',
+    s2_stat1_lbl:'Brugere i DK', s2_stat1_desc:'På tværs af hele platformen',
+    s2_stat2_lbl:'Creators i netværket', s2_stat2_desc:'Aktive og klar til samarbejde',
+    s2_stat3_lbl:'Gns. reach pr. creator', s2_stat3_desc:'Impressions i en kampagne',
+    s2_stat4_lbl:'Push notifikation permissions', s2_stat4_desc:'Direkte bruger-aktivering inapp',
+    s2_stat5_lbl:'Gns. brand wall-følgere', s2_stat5_desc:'Top 50 brands i appen',
+    s2_stat6_lbl:'Email-tilladelser (DK)', s2_stat6_desc:'Kvalificerede og segmenterbare',
+    s2_stat7_lbl:'Globale brugere', s2_stat7_desc:'Total brugerbase på tværs af markeder',
+    s2_stat8_lbl:'Oprettet ønsker',
+    s3_tag:'Koncept &amp; Værdi',
+    s3_subtitle:'I stedet for en flygtig annonce, skaber vi en fast destination på jeres Brand Wall, hvor Creator Marketing og performance smelter sammen.',
+    s3_f1_title:'Fra generisk<br/>til personlig', s3_f1_desc:'&ldquo;Matas Natur&rdquo; bliver til &ldquo;Curated by Emma&rdquo;. Creatoren låner sin troværdighed til listen.',
+    s3_f2_title:'Brand Wall<br/>som destination', s3_f2_desc:'Brugerne lander i jeres eget univers — ser produkter, deals og gemmer favoritter.',
+    s3_f3_title:'Retention<br/>&amp; genbesøg', s3_f3_desc:'Brugere bygger ønskelister over tid — modsat et flygtigt swipe på TikTok.',
+    s4_tag:'Customer Journey', s4_title:'Fra SoMe-Content<br/>til Oprettet Ønske.',
+    s4_subtitle:'Sådan forvandler vi en shortform video til et målbart ønske og en langvarig inspirationskanal.',
+    s4_step1_title:'SoMe Content Skabes', s4_s1_li1:'Creator producerer autentisk video', s4_s1_li2:'TikTok / Reels / Shorts', s4_s1_li3:'Brandets produkter i fokus',
+    s4_step2_title:'Distribution &amp; Boosting', s4_s2_li1:'Organisk post fra creators', s4_s2_li2:'Spark Ads til udvidet målgruppe', s4_s2_li3:'Push til 700.000+ DK-brugere',
+    s4_step3_title:'Landing på Brand Wall', s4_s3_li1:'Swipe-up / link-in-bio / push', s4_s3_li2:'Ind i brandets eget univers', s4_s3_li3:'Creator-kurateret destination',
+    s4_step4_title:'Browse &amp; Inspiration', s4_s4_li1:'Udforsker hele curated liste', s4_s4_li2:'Ser deals og relaterede produkter', s4_s4_li3:'Gemmer favoritter',
+    s4_step5_title:'Ønske Oprettes = Købsintention', s4_s5_li1:'Produkt tilføjes til ønskeliste', s4_s5_li2:'Permanent købssignal', s4_s5_li3:'Grundlag for retargeting',
+    s4_cta:'Fra <b>3 sekunders attention</b> på SoMe → til en <b>permanent relation</b> i appen.',
+    s5_tag:'Hvorfor det virker',
+    s5_title:'Branding, retention<br/>og performance —<br/><span class="serif" style="color:var(--accent);">i samme kampagne.</span>',
+    s5_subtitle:'Creator Takeover samler paid, organic og creator-trust i én aktivering — med varig værdi over tid.',
+    s5_hero_sub:'Sammenlagt effekt',
+    s5_hero_desc:'Paid\u00a0+\u00a0organic\u00a0+\u00a0creator\u00a0trust.<br/><span style="color:rgba(255,255,255,.7);">Markant højere reach end enkeltkanaler.</span>',
+    s5_c1_kicker:'01 · Ejerskab', s5_c1_title:'En permanent destination', s5_c1_desc:'Content lever videre på jeres Brand Wall — det akkumulerer trafik i stedet for at forsvinde som en flygtig annonce.',
+    s5_c2_kicker:'02 · Intention', s5_c2_title:'Køb-klare brugere', s5_c2_desc:'Brugere <em>gemmer</em> produkter frem for at swipe videre — stærkere købsintention og højere retention.',
+    s5_c3_kicker:'03 · Reach', s5_c3_title:'Organisk følgerbase', s5_c3_desc:'Ram eksisterende følgere direkte — brands som Matas aktiverer 350.000+ uden ekstra annoncekroner.',
+    s5_c4_kicker:'04 · Rettigheder', s5_c4_title:'Content I ejer', s5_c4_desc:'Professionelt creator-content med fulde rettigheder — genbrug frit på jeres egne kanaler og i egen paid-strategi.',
+    s6_tag:'Proof of Concept', s6_cat_lbl:'Kategori', s6_per_lbl:'Periode', s6_brand_lbl:'Brand', s6_campaign_lbl:'Kampagne', s6_setup_lbl:'Setup', s6_duration_lbl:'Varighed', s6_challenge_lbl:'Challenge', s6_results_lbl:'Resultater',
+    s6_kpi1_lbl:'Direkte reach', s6_kpi2_lbl:'Impressions / creator', s6_kpi3_lbl:'Ønsker tilføjet', s6_kpi4_lbl:'Engagement rate', s6_kpi5_lbl:'Brand wall-følgere', s6_kpi6_lbl:'Uplift vs. baseline',
+    s7_tag:'Pakke &amp; Proces',
+    s7_title:'Én pakke. <span class="serif" style="color:var(--accent);">Tre kanaler.</span><br/>Alt hvad I får.',
+    s7_subtitle:'Creator Curated-pakken aktiverer alle tre kanaler samtidigt — med full service fra brief til rapport.',
+    s7_pkg_lbl:'Pakke', s7_price_unit:'pr. creator · minimum\u00a0\u00a03+', s7_dur_val:'4 uger', s7_dur_lbl:'Kampagne',
+    s7_ch1_kicker:'Kanal 01', s7_ch1_type:'Organisk', s7_ch1_title:'In-App Aktivering', s7_ch1_desc:'Permanent placering i appens naturlige flows — uden annoncekroner.',
+    s7_ch1_i1:'Brand Wall opsætning', s7_ch1_i2:'Activity feed eksponering', s7_ch1_i3:'Trending-univers', s7_ch1_i4:'Push notifications',
+    s7_ch2_kicker:'Kanal 02', s7_ch2_type:'Content', s7_ch2_title:'Curated Brand Wall', s7_ch2_desc:'Professionelt creator-content produceret og kurateret til jeres brand.',
+    s7_ch2_i1:'Creator booking &amp; briefing', s7_ch2_i2:'Content produktion (video)', s7_ch2_i3:'Fulde rettigheder', s7_ch2_i4:'Ønskedata-rapportering',
+    s7_ch3_kicker:'Kanal 03', s7_ch3_type:'Skalering', s7_ch3_title:'Paid Boosting', s7_ch3_desc:'Spark Ads boost af creator-videoer — autentisk, native format.',
+    s7_ch3_i1:'Spark Ads setup', s7_ch3_i2:'Boost af creator-konto', s7_ch3_i3:'Udvidet målgruppe', s7_ch3_i4:'Genbrug i egen paid-strategi',
+    s7_role_lbl:'Jeres rolle',
+    s7_step1:'<span style="color:var(--accent);font-weight:700;">01</span> Vælg produkter',
+    s7_step2:'<span style="color:var(--accent);font-weight:700;">02</span> Vi producerer',
+    s7_step3:'<span style="color:var(--accent);font-weight:700;">03</span> Godkend videoer',
+    s7_step4:'<span style="color:var(--accent);font-weight:700;">04</span> Modtag slutrapport',
+  };
+
+  const EN = {
+    lang:'en', page_title:'Ønskeskyen · Creator Takeover 2026',
+    s1_tag:'Creator Solutions · 2026',
+    s1_subtitle:'Combines Creator Marketing with Wishlists.<br/>We turn product lists into curated destinations<br/>that drive inspiration, wishes and purchases.',
+    s1_p1_desc:"Push, activity feed, Spark Ads and creators' own channels in one activation.",
+    s1_p2_hd:'High Retention', s1_p2_desc:'Users save to their wishlist instead of swiping past.',
+    s1_p3_hd:'Purchase Intent', s1_p3_desc:'Every wish is a permanent purchase signal and the foundation for retargeting.',
+    s2_tag:'Data &amp; Performance', s2_title:'Platform Overview<br/>&amp; Reach',
+    s2_subtitle:'Key figures driving your campaign\'s success — across the entire Ønskeskyen ecosystem.',
+    s2_stat1_lbl:'Users in DK', s2_stat1_desc:'Across the entire platform',
+    s2_stat2_lbl:'Creators in the network', s2_stat2_desc:'Active and ready to collaborate',
+    s2_stat3_lbl:'Avg. reach per creator', s2_stat3_desc:'Impressions in a campaign',
+    s2_stat4_lbl:'Push notification permissions', s2_stat4_desc:'Direct user activation in-app',
+    s2_stat5_lbl:'Avg. brand wall followers', s2_stat5_desc:'Top 50 brands in the app',
+    s2_stat6_lbl:'Email permissions (DK)', s2_stat6_desc:'Qualified and segmentable',
+    s2_stat7_lbl:'Global users', s2_stat7_desc:'Total user base across markets',
+    s2_stat8_lbl:'Wishes created',
+    s3_tag:'Concept &amp; Value',
+    s3_subtitle:'Instead of a fleeting ad, we create a permanent destination on your Brand Wall, where Creator Marketing and performance merge.',
+    s3_f1_title:'From generic<br/>to personal', s3_f1_desc:'&ldquo;Matas Natur&rdquo; becomes &ldquo;Curated by Emma&rdquo;. The creator lends their credibility to the list.',
+    s3_f2_title:'Brand Wall<br/>as destination', s3_f2_desc:"Users land in your own universe — browsing products, deals and saving favourites.",
+    s3_f3_title:'Retention<br/>&amp; return visits', s3_f3_desc:'Users build wishlists over time — unlike a fleeting swipe on TikTok.',
+    s4_tag:'Customer Journey', s4_title:'From Social Content<br/>to Saved Wish.',
+    s4_subtitle:'How we turn a short-form video into a measurable wish and a lasting inspiration channel.',
+    s4_step1_title:'Social Content Created', s4_s1_li1:'Creator produces authentic video', s4_s1_li2:'TikTok / Reels / Shorts', s4_s1_li3:'Brand products in focus',
+    s4_step2_title:'Distribution &amp; Boosting', s4_s2_li1:'Organic post from creators', s4_s2_li2:'Spark Ads to extended audience', s4_s2_li3:'Push to 700K+ DK users',
+    s4_step3_title:'Landing on Brand Wall', s4_s3_li1:'Swipe-up / link-in-bio / push', s4_s3_li2:"Into the brand's own universe", s4_s3_li3:'Creator-curated destination',
+    s4_step4_title:'Browse &amp; Inspiration', s4_s4_li1:'Explores the full curated list', s4_s4_li2:'Views deals and related products', s4_s4_li3:'Saves favourites',
+    s4_step5_title:'Wish Created = Purchase Intent', s4_s5_li1:'Product added to wishlist', s4_s5_li2:'Permanent purchase signal', s4_s5_li3:'Foundation for retargeting',
+    s4_cta:'From <b>3 seconds of attention</b> on social → to a <b>permanent relationship</b> in the app.',
+    s5_tag:'Why It Works',
+    s5_title:'Branding, retention<br/>and performance —<br/><span class="serif" style="color:var(--accent);">in one campaign.</span>',
+    s5_subtitle:'Creator Takeover combines paid, organic and creator trust in one activation — with lasting value over time.',
+    s5_hero_sub:'Combined effect',
+    s5_hero_desc:'Paid\u00a0+\u00a0organic\u00a0+\u00a0creator\u00a0trust.<br/><span style="color:rgba(255,255,255,.7);">Significantly higher reach than single channels.</span>',
+    s5_c1_kicker:'01 · Ownership', s5_c1_title:'A permanent destination', s5_c1_desc:'Content lives on on your Brand Wall — accumulating traffic instead of vanishing like a fleeting ad.',
+    s5_c2_kicker:'02 · Intent', s5_c2_title:'Purchase-ready users', s5_c2_desc:'Users <em>save</em> products rather than swiping past — stronger purchase intent and higher retention.',
+    s5_c3_kicker:'03 · Reach', s5_c3_title:'Organic follower base', s5_c3_desc:'Reach existing followers directly — brands like Matas activate 350K+ without extra ad spend.',
+    s5_c4_kicker:'04 · Rights', s5_c4_title:'Content you own', s5_c4_desc:'Professional creator content with full rights — reuse freely on your own channels and in your own paid strategy.',
+    s6_tag:'Proof of Concept', s6_cat_lbl:'Category', s6_per_lbl:'Period', s6_brand_lbl:'Brand', s6_campaign_lbl:'Campaign', s6_setup_lbl:'Setup', s6_duration_lbl:'Duration', s6_challenge_lbl:'Challenge', s6_results_lbl:'Results',
+    s6_kpi1_lbl:'Direct reach', s6_kpi2_lbl:'Impressions / creator', s6_kpi3_lbl:'Wishes added', s6_kpi4_lbl:'Engagement rate', s6_kpi5_lbl:'Brand wall followers', s6_kpi6_lbl:'Uplift vs. baseline',
+    s7_tag:'Package &amp; Process',
+    s7_title:'One package. <span class="serif" style="color:var(--accent);">Three channels.</span><br/>Everything you get.',
+    s7_subtitle:'The Creator Curated package activates all three channels simultaneously — with full service from brief to report.',
+    s7_pkg_lbl:'Package', s7_price_unit:'per creator · minimum 3+', s7_dur_val:'4 weeks', s7_dur_lbl:'Campaign',
+    s7_ch1_kicker:'Channel 01', s7_ch1_type:'Organic', s7_ch1_title:'In-App Activation', s7_ch1_desc:"Permanent placement in the app's natural flows — no ad spend.",
+    s7_ch1_i1:'Brand Wall setup', s7_ch1_i2:'Activity feed exposure', s7_ch1_i3:'Trending universe', s7_ch1_i4:'Push notifications',
+    s7_ch2_kicker:'Channel 02', s7_ch2_type:'Content', s7_ch2_title:'Curated Brand Wall', s7_ch2_desc:'Professional creator content produced and curated for your brand.',
+    s7_ch2_i1:'Creator booking &amp; briefing', s7_ch2_i2:'Content production (video)', s7_ch2_i3:'Full rights', s7_ch2_i4:'Wish data reporting',
+    s7_ch3_kicker:'Channel 03', s7_ch3_type:'Scaling', s7_ch3_title:'Paid Boosting', s7_ch3_desc:'Spark Ads boost of creator videos — authentic, native format.',
+    s7_ch3_i1:'Spark Ads setup', s7_ch3_i2:'Boost of creator account', s7_ch3_i3:'Extended audience', s7_ch3_i4:'Reuse in own paid strategy',
+    s7_role_lbl:'Your role',
+    s7_step1:'<span style="color:var(--accent);font-weight:700;">01</span> Choose products',
+    s7_step2:'<span style="color:var(--accent);font-weight:700;">02</span> We produce',
+    s7_step3:'<span style="color:var(--accent);font-weight:700;">03</span> Approve videos',
+    s7_step4:'<span style="color:var(--accent);font-weight:700;">04</span> Receive final report',
+  };
+
+  const GW = { ...EN,
+    page_title:'Gowish · Creator Takeover 2026',
+    s2_subtitle:"Key figures driving your campaign's success — across the entire Gowish ecosystem.",
+    s4_s2_li3:'Push to 1M+ users',
+  };
+
+  const MODES = { 'onskeskyen-da': DA, 'onskeskyen-en': EN, 'gowish-en': GW };
+  let currentMode = 'onskeskyen-da';
+
+  function applyMode(mode) {
+    const c = MODES[mode];
+    if (!c) return;
+    currentMode = mode;
+    document.title = c.page_title;
+    document.documentElement.lang = c.lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (c[key] !== undefined) el.innerHTML = c[key];
+    });
+    document.querySelectorAll('#cfg .mbtn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+  }
+
+  /* ── TWEAKS (existing) ── */
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"showPrice": true}/*EDITMODE-END*/;
+  const state = { ...TWEAK_DEFAULTS };
+
+  function applyState(){
+    document.body.classList.toggle('hide-price', !state.showPrice);
+    const cb = document.getElementById('tw-price');
+    if (cb) cb.checked = !!state.showPrice;
+  }
+  function post(edits){ try { window.parent.postMessage({type:'__edit_mode_set_keys', edits}, '*'); } catch(e){} }
+
+  window.addEventListener('message', (e) => {
+    const d = e.data || {};
+    if (d.type === '__activate_edit_mode') document.body.classList.add('tweaks-open');
+    else if (d.type === '__deactivate_edit_mode') document.body.classList.remove('tweaks-open');
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    applyState();
+    applyMode('onskeskyen-da');
+    document.getElementById('tw-price').addEventListener('change', (e) => {
+      state.showPrice = e.target.checked;
+      applyState();
+      post({ showPrice: state.showPrice });
+    });
+    document.querySelectorAll('#cfg .mbtn').forEach(btn => {
+      btn.addEventListener('click', () => applyMode(btn.dataset.mode));
+    });
+    try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e){}
+  });
+</script>
+
+</body>
+</html>
