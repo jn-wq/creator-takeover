@@ -321,6 +321,9 @@
   }
   #cfg .mbtn:hover{border-color:var(--accent);color:var(--accent);}
   #cfg .mbtn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  .vid-slot{border-radius:6px;overflow:hidden;}
+  .vid-slot iframe{width:100%;height:100%;border:none;display:block;}
 </style>
 
 </head>
@@ -744,7 +747,10 @@
       <div style="display:flex;flex-direction:column;gap:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 24px 50px -24px rgba(255,99,52,.4);border-color:var(--pink-2);">
         <div style="position:relative;height:342px;background:var(--slate-tint);display:flex;align-items:center;justify-content:center;">
           <div style="position:relative;width:192px;height:342px;">
-            <image-slot id="s9-v1" shape="rect" fit="cover" placeholder="Drop video" style="width:100%;height:100%;"></image-slot>
+            <div class="vid-slot" id="s9-v1" style="width:100%;height:100%;background:var(--slate-tint);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><polygon points="5,3 19,12 5,21"></polygon></svg>
+              <span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Video</span>
+            </div>
             <div style="position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 9px;background:rgba(0,0,0,.55);color:#fff;border-radius:999px;z-index:4;">TikTok</div>
           </div>
         </div>
@@ -764,7 +770,10 @@
       <div style="display:flex;flex-direction:column;gap:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;">
         <div style="position:relative;height:342px;background:var(--slate-tint);display:flex;align-items:center;justify-content:center;">
           <div style="position:relative;width:192px;height:342px;">
-            <image-slot id="s9-v2" shape="rect" fit="cover" placeholder="Drop video" style="width:100%;height:100%;"></image-slot>
+            <div class="vid-slot" id="s9-v2" style="width:100%;height:100%;background:var(--slate-tint);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><polygon points="5,3 19,12 5,21"></polygon></svg>
+              <span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Video</span>
+            </div>
             <div style="position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 9px;background:rgba(0,0,0,.55);color:#fff;border-radius:999px;z-index:4;">TikTok</div>
           </div>
         </div>
@@ -784,7 +793,10 @@
       <div style="display:flex;flex-direction:column;gap:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;">
         <div style="position:relative;height:342px;background:var(--slate-tint);display:flex;align-items:center;justify-content:center;">
           <div style="position:relative;width:192px;height:342px;">
-            <image-slot id="s9-v3" shape="rect" fit="cover" placeholder="Drop video" style="width:100%;height:100%;"></image-slot>
+            <div class="vid-slot" id="s9-v3" style="width:100%;height:100%;background:var(--slate-tint);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><polygon points="5,3 19,12 5,21"></polygon></svg>
+              <span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Video</span>
+            </div>
             <div style="position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 9px;background:rgba(0,0,0,.55);color:#fff;border-radius:999px;z-index:4;">TikTok</div>
           </div>
         </div>
@@ -804,7 +816,10 @@
       <div style="display:flex;flex-direction:column;gap:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;">
         <div style="position:relative;height:342px;background:var(--slate-tint);display:flex;align-items:center;justify-content:center;">
           <div style="position:relative;width:192px;height:342px;">
-            <image-slot id="s9-v4" shape="rect" fit="cover" placeholder="Drop video" style="width:100%;height:100%;"></image-slot>
+            <div class="vid-slot" id="s9-v4" style="width:100%;height:100%;background:var(--slate-tint);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><polygon points="5,3 19,12 5,21"></polygon></svg>
+              <span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Video</span>
+            </div>
             <div style="position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 9px;background:rgba(0,0,0,.55);color:#fff;border-radius:999px;z-index:4;">TikTok</div>
           </div>
         </div>
@@ -973,6 +988,33 @@
   /* ── ADMIN CONFIG ─────────────────────────────── */
   const ACTIVE_CASE  = 0;
   const PHONE_VIDEO  = '';
+
+  /* ── CASE VIDEOS (Slide 6) ────────────────────── */
+  // Indsæt YouTube-link for hvert videospot — eller lad det ste staa tomt
+  const CASE_VIDEOS = [
+    '',  // Spot 1 — fx 'https://youtu.be/ABC123'
+    '',  // Spot 2
+    '',  // Spot 3
+    '',  // Spot 4
+  ];
+
+  function youtubeId(url) {
+    if (!url) return null;
+    const m = url.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([^?&\/]+)/);
+    return m ? m[1] : null;
+  }
+
+  function applyVideos() {
+    document.querySelectorAll('.vid-slot').forEach((el, i) => {
+      const vid = youtubeId(CASE_VIDEOS[i] || '');
+      if (vid) {
+        el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + vid
+          + '?rel=0&modestbranding=1" style="width:100%;height:100%;border:none;display:block;"'
+          + ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'
+          + ' allowfullscreen></iframe>';
+      }
+    });
+  }
 
   /* ── TWEAK DEFAULTS ───────────────────────────── */
   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"showPrice": false}/*EDITMODE-END*/;
@@ -1235,6 +1277,7 @@
     const startMode = (urlMode && MODES[urlMode]) ? urlMode : 'onskeskyen-da';
     applyState();
     applyMode(startMode);
+    applyVideos();
 
     document.getElementById('tw-price').addEventListener('change', (e) => {
       state.showPrice = e.target.checked;
