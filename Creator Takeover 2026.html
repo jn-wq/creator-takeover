@@ -305,19 +305,32 @@
   .logo-brand{font-size:20px;font-weight:600;letter-spacing:-0.01em;color:var(--ink);text-transform:none;}
   .slide.dark .logo-brand,.slide.accent .logo-brand{color:#fff;}
 
-  /* language switcher */
+  /* language switcher — collapsible pill */
   #cfg{
     position:fixed;left:20px;bottom:20px;z-index:2147483500;
-    background:#fff;border:1px solid var(--line-2);border-radius:12px;
-    padding:14px 16px;box-shadow:0 20px 50px -20px rgba(0,0,0,.25);
-    font-family:'Inter',sans-serif;font-size:13px;min-width:280px;
+    display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+    font-family:'Inter',sans-serif;
   }
-  #cfg .cfg-lbl{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px;}
-  #cfg .mode-row{display:flex;flex-direction:column;gap:4px;}
+  .mode-row{
+    display:none;flex-direction:column;gap:4px;
+    background:#fff;border:1px solid var(--line-2);border-radius:12px;
+    padding:10px;box-shadow:0 12px 40px -10px rgba(0,0,0,.25);min-width:200px;
+  }
+  #cfg.open .mode-row{display:flex;}
+  #cfg-toggle{
+    display:flex;align-items:center;gap:8px;
+    background:rgba(30,41,59,.9);color:#fff;border:none;
+    border-radius:999px;padding:9px 16px;font-size:13px;font-weight:500;
+    cursor:pointer;font-family:inherit;letter-spacing:-0.01em;
+    box-shadow:0 4px 16px rgba(0,0,0,.2);transition:background .15s;
+  }
+  #cfg-toggle:hover{background:rgba(30,41,59,1);}
+  #cfg-chevron{transition:transform .2s;flex-shrink:0;}
+  #cfg.open #cfg-chevron{transform:rotate(180deg);}
   #cfg .mbtn{
     background:none;border:1px solid var(--line);border-radius:8px;
-    padding:7px 12px;font-size:13px;font-family:inherit;cursor:pointer;
-    text-align:left;color:var(--ink-2);transition:all .15s;
+    padding:8px 12px;font-size:13px;font-family:inherit;cursor:pointer;
+    text-align:left;color:var(--ink-2);transition:all .15s;width:100%;
   }
   #cfg .mbtn:hover{border-color:var(--accent);color:var(--accent);}
   #cfg .mbtn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
@@ -508,7 +521,7 @@
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 21s-8-5-8-11a5 5 0 019-3 5 5 0 019 3c0 6-8 11-8 11z"></path></svg>
         </div>
         <div>
-          <div style="font-size:88px;font-weight:600;letter-spacing:-0.04em;line-height:0.88;font-variant-numeric:tabular-nums;">+159%</div>
+          <div style="font-size:80px;font-weight:600;letter-spacing:-0.04em;line-height:0.88;font-variant-numeric:tabular-nums;">+159%</div>
           <div data-i18n="s3_eng_desc" style="font-size:17px;color:rgba(255,255,255,.85);margin-top:8px;line-height:1.35;">højere engagement end non-creator annoncer ved samme CPM.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:14px;margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.25);">
@@ -524,7 +537,7 @@
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg>
         </div>
         <div>
-          <div style="font-size:88px;font-weight:600;letter-spacing:-0.04em;line-height:0.88;color:var(--accent);font-variant-numeric:tabular-nums;">60%</div>
+          <div style="font-size:80px;font-weight:600;letter-spacing:-0.04em;line-height:0.88;color:var(--accent);font-variant-numeric:tabular-nums;">60%</div>
           <div data-i18n="s3_views_desc" style="font-size:17px;color:var(--ink-3);margin-top:8px;line-height:1.35;">af alt TikTok brand-engagement kommer fra user-generated content.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:14px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line);">
@@ -541,7 +554,7 @@
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.8"><path d="M9 3v9l3-2 3 6 2-1-3-6h4z"></path></svg>
         </div>
         <div>
-          <div style="font-size:88px;font-weight:600;letter-spacing:-0.04em;line-height:0.88;color:var(--accent);font-variant-numeric:tabular-nums;">4×</div>
+          <div style="font-size:80px;font-weight:600;letter-spacing:-0.04em;line-height:0.88;color:var(--accent);font-variant-numeric:tabular-nums;">4×</div>
           <div data-i18n="s3_ctr_desc" style="font-size:17px;color:var(--ink-3);margin-top:8px;line-height:1.35;">højere click-through rate end traditionelle annoncer.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:14px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line);">
@@ -967,11 +980,15 @@
 
 <!-- ============ LANGUAGE SWITCHER ============ -->
 <div id="cfg">
-  <div class="cfg-lbl">Language / Brand</div>
   <div class="mode-row">
     <button class="mbtn active" data-mode="onskeskyen-da">🇩🇰 Ønskeskyen</button>
     <button class="mbtn" data-mode="gowish-en">🌍 Gowish EN</button>
   </div>
+  <button id="cfg-toggle">
+    <span id="cfg-flag">🇩🇰</span>
+    <span id="cfg-label">Ønskeskyen</span>
+    <svg id="cfg-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
 </div>
 
 <!-- ============ TWEAKS PANEL ============ -->
@@ -1237,6 +1254,9 @@
   };
 
   /* ── APPLY MODE ───────────────────────────────── */
+  const MODE_FLAGS  = {'onskeskyen-da':'🇩🇰','gowish-en':'🌍'};
+  const MODE_LABELS = {'onskeskyen-da':'Ønskeskyen','gowish-en':'Gowish EN'};
+
   function applyMode(mode) {
     const c = MODES[mode] || DA;
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1247,6 +1267,11 @@
     document.querySelectorAll('#cfg .mbtn').forEach(b => {
       b.classList.toggle('active', b.dataset.mode === mode);
     });
+    const f = document.getElementById('cfg-flag');
+    const l = document.getElementById('cfg-label');
+    if (f) f.textContent = MODE_FLAGS[mode]  || '🇩🇰';
+    if (l) l.textContent  = MODE_LABELS[mode] || 'Ønskeskyen';
+    document.getElementById('cfg').classList.remove('open');
   }
 
   /* ── APPLY STATE (price toggle) ───────────────── */
@@ -1295,6 +1320,14 @@
       });
     });
 
+    const cfgEl = document.getElementById('cfg');
+    document.getElementById('cfg-toggle').addEventListener('click', (e) => {
+      e.stopPropagation();
+      cfgEl.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!cfgEl.contains(e.target)) cfgEl.classList.remove('open');
+    });
     try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e){}
   });
 </script>
